@@ -1,0 +1,30 @@
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  LOAD_PROPOSALS: True
+  PROPOSAL_GENERATOR:
+    NAME: "PrecomputedProposals"
+  ROI_HEADS:
+    NAME: "Res5WSROIHeads"
+    NUM_CLASSES: 20
+  ROI_MIL_HEAD:
+    NAME: "WSDNHead"
+    THRESHOLD: 0.15
+  PSEUDO_LABELER:
+    NAME: "MaxLabeler"
+  MAX_PROPOSALS_PER_IMAGE_TRAIN: 500
+DATASETS:
+  TRAIN: ("voc_2012_seg_trainaug",)
+  PROPOSAL_FILES_TRAIN: ("./datasets/voc_2012_trainaug_slc_srch.pkl", )
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  TEST: ("voc_2012_seg_val",)
+  PROPOSAL_FILES_TEST: ("./datasets/voc_2012_val_slc_srch.pkl", )
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 3000
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.005
+  STEPS: (48000, 64000)
+  MAX_ITER: 72000  # maybe we don't need so many steps
+INPUT:
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+SEED: 490596443
+

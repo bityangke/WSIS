@@ -1,0 +1,21 @@
+_BASE_: "./Base-RCNN-C4.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+  BOX_CLS_ON: True
+  ROI_HEADS:
+    IOU_THRESHOLDS: [0.1, 0.4, 0.6]
+    IOU_LABELS: [-1, 0, -1, 1]
+    NMS_THRESH_TEST: 0.3
+    SCORE_THRESH_TEST: 0.005
+#    NMS_THRESH_TEST: 0.4
+#    SCORE_THRESH_TEST: 0.0001
+  ROI_BOX_HEAD:
+    POOLER_TYPE: "ROIPool"
+  BOX_CLS_LOSS_WEIGHT: 0.5
+#  TEST_LATENT_PREDICTIONS: True
+SOLVER:
+  IMS_PER_BATCH: 4
+OUTPUT_DIR: "./output/r50_wsdn_0.5rcnn"
+

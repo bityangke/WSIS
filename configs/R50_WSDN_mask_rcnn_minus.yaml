@@ -1,0 +1,13 @@
+_BASE_: "./Base-RCNN-C4.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+  BOX_CLS_ON: True
+  MASK_ON: True
+  ROI_HEADS:
+    IOU_THRESHOLDS: [0.1, 0.4, 0.6]
+    IOU_LABELS: [-1, 0, -1, 1]
+  ROI_BOX_HEAD:
+    CLS_AGNOSTIC_BBOX_REG: True
+OUTPUT_DIR: "./output/r50_wsdn_mask_rcnn_minus"
